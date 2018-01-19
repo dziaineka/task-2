@@ -1,6 +1,7 @@
 (function (root) {
     var WATER = root.SHRI_ISLANDS.WATER;
     var ISLAND = root.SHRI_ISLANDS.ISLAND;
+    const DISCOVERED_ISLAND = 2;
 
     /**
      * Функция находит кол-во островов на карте
@@ -12,8 +13,8 @@
     function solution(map) {
         // todo: подсчитать кол-во островов на карте        
         function checkLand(row, column) {
-            if (map[row][column] == 1) {
-                map[row][column] = 2;
+            if (map[row][column] == ISLAND) {
+                map[row][column] = DISCOVERED_ISLAND;
                 discoverIsland(row, column);
                 return true;
             }
@@ -22,12 +23,12 @@
         function discoverIsland(row, column) {
             var row_dryland = row;
             var column_dryland = column;
-            
+
             // посмотреть сверху
             if (row_dryland != 0) {
                 checkLand(row_dryland - 1, column_dryland);
             }
-        
+
             // посмотреть справа
             if (column_dryland != map[0].length - 1) {
                 checkLand(row_dryland, column_dryland + 1);
@@ -44,27 +45,27 @@
             }
         }
 
-        function returnOne() {
+        function returnFog() {
             for (var row = 0; row < map.length; row++) {
                 for (var column = 0; column < map[row].length; column++) {
-                    if (map[row][column] == 2) {
-                        map[row][column] = 1;
+                    if (map[row][column] == DISCOVERED_ISLAND) {
+                        map[row][column] = ISLAND;
                     }
                 }
             }
         }
-        
+
         var islands_amount = 0;
 
         for (var row = 0; row < map.length; row++) {
             for (var column = 0; column < map[row].length; column++) {
                 if (checkLand(row, column)) {
-                    islands_amount++;        
+                    islands_amount++;
                 }
             }
         }
 
-        returnOne();
+        returnFog();
 
         return islands_amount;
     }
