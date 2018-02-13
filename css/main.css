@@ -40,11 +40,14 @@ body {
     background-color: #fad946;
 }
 
+.log_root {
+    display: flex;
+    flex-flow: row wrap;
+}
+
 li.log {
     display: block;
-    position: relative;
-    float: left;
-    width: 30%;
+    width: 50%;
 }
 
 .log_title {
